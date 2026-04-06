@@ -173,10 +173,10 @@ function MasonryColumn({ images, colIndex, globalOffset, onOpen }: {
 }
 
 const stats = [
-  { number: "٥٠٠+", label: "مريض سعيد" },
-  { number: "٥ ⭐", label: "متوسط التقييم" },
-  { number: "٣١+", label: "تقييم على Google" },
-  { number: "١٠٠٪", label: "يوصون بالعيادة" },
+  { number: "+500", label: "مريض سعيد" },
+  { number: "5 ⭐", label: "متوسط التقييم" },
+  { number: "+31", label: "تقييم على Google" },
+  { number: "100%", label: "يوصون بالعيادة" },
 ];
 
 export default function ReviewsPage() {
@@ -233,7 +233,7 @@ export default function ReviewsPage() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-xl text-slate-600 max-w-2xl mx-auto mb-10 leading-relaxed"
           >
-            أكثر من ٥٠٠ مريض وثقوا بنا. هذه تقييماتهم الحقيقية على Google — بدون تعديل أو انتقاء.
+            أكثر من +500 مريض وثقوا بنا. هذه تقييماتهم الحقيقية على Google — بدون تعديل أو انتقاء.
           </motion.p>
 
           {/* Stars display */}
