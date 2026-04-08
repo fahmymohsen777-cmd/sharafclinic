@@ -64,7 +64,7 @@ function Lightbox({ src, onClose, onPrev, onNext }: { src: string; onClose: () =
       >
         <div className="relative rounded-3xl overflow-hidden shadow-2xl">
           <Image
-            src={`/reviews/${src}`}
+            src={src}
             alt="تقييم"
             width={700}
             height={900}
@@ -109,7 +109,7 @@ function ReviewCard({ src, index, onClick }: { src: string; index: number; onCli
       className="relative cursor-zoom-in group rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 bg-white"
     >
       <Image
-        src={`/reviews/${src}`}
+        src={src}
         alt={`تقييم ${index + 1}`}
         width={400}
         height={500}
