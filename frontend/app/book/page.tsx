@@ -14,6 +14,34 @@ export default function BookAppointment() {
   const [time, setTime] = useState<string>("");
   const [service, setService] = useState<string>("");
   const [formData, setFormData] = useState({ name: "", phone: "", notes: "" });
+  const [countryCode, setCountryCode] = useState("+20");
+
+  const countryCodes = [
+    { code: "+20", flag: "🇪🇬", name: "مصر" },
+    { code: "+966", flag: "🇸🇦", name: "السعودية" },
+    { code: "+971", flag: "🇦🇪", name: "الإمارات" },
+    { code: "+965", flag: "🇰🇼", name: "الكويت" },
+    { code: "+974", flag: "🇶🇦", name: "قطر" },
+    { code: "+973", flag: "🇧🇭", name: "البحرين" },
+    { code: "+968", flag: "🇴🇲", name: "عمان" },
+    { code: "+962", flag: "🇯🇴", name: "الأردن" },
+    { code: "+961", flag: "🇱🇧", name: "لبنان" },
+    { code: "+964", flag: "🇮🇶", name: "العراق" },
+    { code: "+218", flag: "🇱🇾", name: "ليبيا" },
+    { code: "+216", flag: "🇹🇳", name: "تونس" },
+    { code: "+213", flag: "🇩🇿", name: "الجزائر" },
+    { code: "+212", flag: "🇲🇦", name: "المغرب" },
+    { code: "+249", flag: "🇸🇩", name: "السودان" },
+    { code: "+967", flag: "🇾🇪", name: "اليمن" },
+    { code: "+970", flag: "🇵🇸", name: "فلسطين" },
+    { code: "+963", flag: "🇸🇾", name: "سوريا" },
+    { code: "+90", flag: "🇹🇷", name: "تركيا" },
+    { code: "+44", flag: "🇬🇧", name: "بريطانيا" },
+    { code: "+1", flag: "🇺🇸", name: "أمريكا" },
+    { code: "+49", flag: "🇩🇪", name: "ألمانيا" },
+    { code: "+33", flag: "🇫🇷", name: "فرنسا" },
+    { code: "+39", flag: "🇮🇹", name: "إيطاليا" },
+  ];
   
   // Helper to fix Javascript timezone issues (keeps the date exactly as selected in local time)
   const getLocalDateString = useCallback((d: Date) => {
@@ -188,7 +216,7 @@ export default function BookAppointment() {
       const { error: insertError } = await supabase.from("bookings").insert({
         user_id: userId,
         name: formData.name,
-        phone: `+20${formData.phone}`,
+        phone: `${countryCode}${formData.phone}`,
         date: dateString,
         time,
         service,
@@ -362,7 +390,19 @@ export default function BookAppointment() {
                     <div>
                       <label className="block text-sm font-semibold text-slate-700 mb-2">رقم الهاتف</label>
                       <div className="flex items-center gap-0">
-                        <span className="flex items-center justify-center bg-slate-100 border border-slate-200 border-l-0 rounded-r-xl px-4 py-3 text-slate-600 font-bold text-sm select-none" dir="ltr">+20</span>
+                        <select
+                          value={countryCode}
+                          onChange={(e) => setCountryCode(e.target.value)}
+                          className="bg-slate-100 border border-slate-200 border-l-0 rounded-r-xl px-2 py-3 text-slate-700 font-bold text-sm focus:outline-none focus:border-primary cursor-pointer appearance-none"
+                          dir="ltr"
+                          style={{ minWidth: '90px' }}
+                        >
+                          {countryCodes.map((c) => (
+                            <option key={c.code} value={c.code}>
+                              {c.flag} {c.code}
+                            </option>
+                          ))}
+                        </select>
                         <input 
                           type="tel" 
                           value={formData.phone}
@@ -370,7 +410,7 @@ export default function BookAppointment() {
                           className="w-full bg-slate-50 border border-slate-200 rounded-l-xl px-4 py-3 text-slate-900 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all"
                           placeholder="1000000000"
                           dir="ltr"
-                          maxLength={10}
+                          maxLength={12}
                         />
                       </div>
                     </div>
@@ -428,7 +468,7 @@ export default function BookAppointment() {
                   </div>
                   <div className="flex justify-between">
                     <span className="text-slate-500">رقم الهاتف</span>
-                    <span className="text-slate-900 font-bold text-right" dir="ltr">+20{formData.phone}</span>
+                    <span className="text-slate-900 font-bold text-right" dir="ltr">{countryCode}{formData.phone}</span>
                   </div>
                 </div>
 
