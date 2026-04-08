@@ -20,13 +20,13 @@ export default function UserDashboard() {
       }, 8000);
 
       try {
-        const { data: authData, error: authError } = await supabase.auth.getUser();
-        if (authError || !authData?.user) {
+        const { data: authData, error: authError } = await supabase.auth.getSession();
+        if (authError || !authData?.session?.user) {
           clearTimeout(timeoutId);
           window.location.href = "/auth/login";
           return;
         }
-        const user = authData.user;
+        const user = authData.session.user;
 
         // Fetch User Profile
         const { data: profileData } = await supabase
